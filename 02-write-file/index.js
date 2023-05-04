@@ -1,27 +1,14 @@
 const { stdin  , stdout } = process;
 const fs = require('fs');
-const path = require('path');
+const stream =fs.createWriteStream('notes.txt')
 
 stdout.write('Hello! Write your text ... \n');
-
-fs.open('notes.txt' , 'w' , (err)=> {if(err)throw err});
-
 stdin.on('data' , data=>{
-  fs.appendFile(path.join(__dirname , 'notes.txt'),
-    data,
-    err=>{
-      if(err) throw err
-      
-    }
-  )
-  if(data === 'exit') process.exit()
+  data = data.toString().trim()
+  if(data === 'exit'){
+    process.exit()
+  }
+  stream.write(data)
 })
 
-process.on('exit' , (code)=>{
-  if(code === 0) {
-    stdout.write('Good Luck!')
-  }
-  else{
-    stdout.write('Oh no :( . Some Err')
-  }
-});
+process.on('exit' , ()=>{console.log('Buy!Good Luck!')})
