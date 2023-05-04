@@ -1,15 +1,12 @@
 const { stdin  , stdout } = process;
 const fs = require('fs');
-
-
+const stream =fs.createWriteStream('notes.txt')
 stdout.write('Hello! Write your text ... \n');
-const out = fs.createWriteStream('notes.text');
-stdin.on('data' , data =>{
-  const myData = data.toString().trim()
-  if(myData === 'exit') {
+stdin.on('data' , data=>{
+  data = data.toString().trim()
+  if(data === 'exit'){
     process.exit()
   }
-  out.write(myData)
+  stream.write(data + '\n')
 })
-
-process.on('exit' , ()=> console.log('Buy!Good Luck!'))
+process.on('exit' , ()=>{console.log('Buy!Good Luck!')})
