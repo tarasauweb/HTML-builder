@@ -8,7 +8,7 @@ stdin.on('data' , data=>{
   if(data === 'exit'){
     process.exit()
   }
-  stream.write(data)
+  stream.write(data + '\n')
 })
 
 process.on('exit' , ()=>{console.log('Buy!Good Luck!')})
